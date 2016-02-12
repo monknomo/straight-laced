@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{SITENAME}} - {{ article.title }}{% endblock %}
+{% block content %}
+<section class="container">
+    <article>
+        <div class="media">
+            <header class="jumbotron media-heading">
+                <a href="{{ SITEURL }}/{{ article.url }}"><h1 class="media-heading">{{ article.title }}</h1></a>    
+                {{article.summary}}
+            </header>
+            <aside class="media-left">
+                <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}"><img src="http://www.gravatar.com/avatar/fdaaf6ef49e7c89553227df9cea99fdd"></img></a>                    
+            </aside>
+            <section class="media-body">
+                {{ article.content }}
+            </section>
+            <footer>
+                {% if article.tags %}
+                    <span class='fullWidth'>
+                        Tags: {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}" class="label label-info">{{ tag }}</a> {% endfor %}
+                    </span>
+                {% endif %}
+                <span class="socialFooterBar">
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ SITEURL }}/{{ article.url }}" data-text="Check out Gunnar's new blog post: {{article.title}}!" data-via="monknomo">Tweet</a>
+
+                    <a class="tumblr-share-button" data-color="blue" data-notes="right" data-posttype="link" data-tags="" data-title="{{article.title}}" data-content="{{ SITEURL }}/{{ article.url }}" data-show-via="<a href='{{SITEURL}}'>Gunnar Gissel's Blog</a>" href="https://embed.tumblr.com/share"></a>
+                </span>
+            </footer>
+        </div>
+    </article>
+</section>
+{% endblock %}

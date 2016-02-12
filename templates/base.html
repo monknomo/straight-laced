@@ -1,0 +1,125 @@
+<html>
+    <head>
+        {% block head %}
+            <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
+                    <meta charset="utf-8" />
+            {% if FEED_ALL_ATOM %}
+                <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full Atom Feed" />
+            {% endif %}
+            {% if FEED_ALL_RSS %}
+                <link href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Full RSS Feed" />
+            {% endif %}
+            {% if FEED_ATOM %}
+                <link href="{{ FEED_DOMAIN }}/{{ FEED_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
+            {% endif %}
+            {% if FEED_RSS %}
+                <link href="{{ FEED_DOMAIN }}/{{ FEED_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+            {% endif %}
+            {% if CATEGORY_FEED_ATOM and category %}
+                <link href="{{ FEED_DOMAIN }}/{{ CATEGORY_FEED_ATOM|format(category.slug) }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Categories Atom Feed" />
+            {% endif %}
+            {% if CATEGORY_FEED_RSS and category %}
+                <link href="{{ FEED_DOMAIN }}/{{ CATEGORY_FEED_RSS|format(category.slug) }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Categories RSS Feed" />
+            {% endif %}
+            {% if TAG_FEED_ATOM and tag %}
+                <link href="{{ FEED_DOMAIN }}/{{ TAG_FEED_ATOM|format(tag.slug) }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Tags Atom Feed" />
+            {% endif %}
+            {% if TAG_FEED_RSS and tag %}
+                <link href="{{ FEED_DOMAIN }}/{{ TAG_FEED_RSS|format(tag.slug) }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Tags RSS Feed" />
+            {% endif %}
+        {% endblock head %}
+        <style>        
+            body{
+                background:ghostwhite;
+            }
+            
+            span.fullWidth{
+                width:100%;
+                float:left;
+                margin:.25em;
+            }
+            
+            span.socialFooterBar{
+                width:100%;
+                float:left;
+                margin:.25em;
+            }
+            
+            span.pageTitleContainer{
+                padding-left:1em;
+                display:block;
+            }
+            
+            section#content > ul * {
+                margin:.25em;
+                list-style-type: none;
+                list-style: none;
+            }
+            
+
+            
+
+        </style>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        {% block header %}
+            <header class="top page-header">
+                <span class="pageTitleContainer">
+                    <a href="{{ SITEURL }}/index.html"><h1>{% block headerTitle %}{{ SITENAME }}{% endblock %}</h1></a>
+                </span>
+                <nav class="navbar navbar-default" itemscope itemtype="https://schema.org/SiteNavigationElement">
+                  <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                      <ul class="nav navbar-nav">
+                        <li {% if page_name == 'index' %}class="active"{% endif %}><a href="{{ SITEURL }}/index.html" itemprop="mainEntity">Home<span class="sr-only"></span></a></li>
+                        {% for title, link in MENUITEMS %}
+                            <li><a href="{{ link }}">{{ title }}</a></li>
+                        {% endfor %}
+                        {% if DISPLAY_CATEGORIES_ON_MENU %}
+                            {% for cat, null in categories %}
+                                <li{% if cat == category %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+                            {% endfor %}
+                        {% endif %}
+                        {% if DISPLAY_PAGES_ON_MENU %}
+                            {% for p in PAGES %}
+                                <li{% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+                            {% endfor %}
+                        {% endif %}
+
+                        
+                        <li {%if page_name == 'tags' %}class="active"{%endif%}><a href="{{ SITEURL }}/tags.html">Tags</a></li>
+                      </ul>
+                      
+                    </div><!-- /.navbar-collapse -->
+                  </div><!-- /.container-fluid -->
+                </nav>
+            </header>
+        {% endblock %}
+        {% block content %}{% endblock %}
+        <script>!function(d,s,id){var js,ajs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://secure.assets.tumblr.com/share-button.js";ajs.parentNode.insertBefore(js,ajs);}}(document, "script", "tumblr-js");</script>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    </body>
+</html>
