@@ -1,33 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="container" itemscope itemtype="http://schema.org/Blog">
+    <div id="main" role="main" class="container" itemscope itemtype="http://schema.org/Blog">
         <meta itemprop="name" content="{{SITENAME}}" />
-        <meta itemprop="description" content="Writing about automation, programming, UI/UX and other technical topics" />
+        <meta itemprop="description" content="{{ SITEDESCRIPTION }}" />
         <meta itemprop="url" content="{{ SITEURL }}" />
     {% if articles %}
         {% for article in articles_page.object_list %}
             {# First item #}
             {% if loop.first and not articles_page.has_previous() %}
-                <article class="panel panel-default" itemscope itemtype="http://schema.org/blogPosting"  itemprop="blogPost">
+                <article class="blogpost panel panel-default" itemscope itemtype="http://schema.org/blogPosting"  itemprop="blogPost">
                     <meta itemprop="url" content="{{ SITEURL }}/{{ article.url }}" />
                     <div class="media panel-body">
-                        <header class="jumbotron media-heading">
+                        <header class="blogpost jumbotron media-heading">
                             <a href="{{ SITEURL }}/{{ article.url }}"  ><h1 class="media-heading" itemprop="headline">{{ article.title }}</h1></a>    
                             <section itemprop="description">
                                 {{article.summary}}
                             </section>
                         </header>
-                        <aside class="media-left" >
-                            <a class="url fn" itemprop="author" href="{{ SITEURL }}/{{ article.author.url }}"><img itemprop="image" src="http://www.gravatar.com/avatar/fdaaf6ef49e7c89553227df9cea99fdd"></img></a>                 
+                        <aside class="blogpost media-left" >
+                            <a class="url fn" itemprop="author" href="{{ SITEURL }}/{{ article.author.url }}"><img itemprop="image" src="{{ AVATARLOCATION }}"></img></a>                 
                             <p itemprop="datePublished">{{article.date|strftime('%m/%d/%Y')}}</p> 
                         </aside>
-                        <section class="media-body" itemprop="articleBody">
+                        <section class="blogpost media-body" itemprop="articleBody">
                             {{ article.content }}
                         </section>
-                        <footer>
+                        <footer class="blogpost">
                             {% if article.tags %}
-                                <span class='fullWidth'>
+                                <span class='blogpost fullWidth'>
                                     Tags: {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}" class="label label-info">{{ tag }}</a> {% endfor %}
                                 </span>
                             {% endif %}
@@ -37,29 +37,29 @@
                 </article>
             {# other items #}
             {% else %}
-                <article class="panel panel-default" itemscope itemtype="http://schema.org/blogPosting" itemprop="blogPost">
+                <article class="blogpost panel panel-default" itemscope itemtype="http://schema.org/blogPosting" itemprop="blogPost">
                     <meta itemprop="url" content="{{ SITEURL }}/{{ article.url }}" />
-                   <div class="media panel-body">                    
-                        <aside class="media-left">
-                            <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}"><img itemprop="image" src="http://www.gravatar.com/avatar/fdaaf6ef49e7c89553227df9cea99fdd"></img></a>
+                   <div class="blogpost media panel-body">                    
+                        <aside class="blogpost media-left">
+                            <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}"><img itemprop="image" src="{{ AVATARLOCATION }}"></img></a>
                             <p itemprop="datePublished">{{article.date|strftime('%m/%d/%Y')}}</p>                            
                         </aside>
-                        <div class="media-body">
-                            <header class="media-heading"><a href="{{ SITEURL }}/{{ article.url }}"><h1  itemprop="headline">{{ article.title }}</h1></a></header>
-                            <section itemprop="articleBody">                                
+                        <div class="blogpost media-body">
+                            <header class="blogpost media-heading"><a href="{{ SITEURL }}/{{ article.url }}"><h1  itemprop="headline">{{ article.title }}</h1></a></header>
+                            <section itemprop="blogpost articleBody">                                
                                 {{ article.content }}
                             </section class>
                         </div>
-                        <footer>
+                        <footer class="blogpost">
                             {% if article.tags %}
-                                <span class='fullWidth'>
+                                <span class='blogpost fullWidth'>
                                     Tags: {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}" class="label label-info">{{ tag }}</a> {% endfor %}
                                 </span>
                             {% endif %}
                             {% include 'socialFooterWidget.html' %}
                         </footer>
                     </div>
-            </article>
+                </article>
             {% endif %}
             {% if loop.last %}
                 </ol><!-- /#posts-list -->
