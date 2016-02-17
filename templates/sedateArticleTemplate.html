@@ -1,0 +1,41 @@
+<article class="blogpost panel panel-default" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+                        <meta itemprop="name" content="{{ article.title }}"/>                
+    <meta itemprop="dateModified" content="{{ article.modified|strftime('%m/%d/%Y') }}"/>
+   <div class="blogpost media panel-body">                    
+        <aside class="blogpost media-left">
+            <div itemscope itemtype="http://schema.org/Person" itemprop="author">
+                <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}"><img itemprop="image" src="{{ article.author_gravatar }}"/></a>
+                <a itemprop="url" href="{{ SITEURL }}/{{ article.author.url }}" rel="author">
+                </a>
+                <div itemprop="description">He's a great guy</div>                              
+            </div>                       
+            <time itemprop="datePublished">{{article.date|strftime('%m/%d/%Y')}}</time>                         
+        </aside>
+        <div class="blogpost media-body">
+            <header class="blogpost media-heading"><a href="{{ SITEURL }}/{{ article.url }}" itemprop="url mainEntityOfPage"><h1  itemprop="headline name">{{ article.title }}</h1></a></header>
+            <section itemprop="articleBody">                                
+                {{ article.content }}
+            </section class>
+        </div>
+        <footer class="blogpost">
+            <div itemscope  itemtype="https://schema.org/Organization" itemprop="publisher">
+                <meta itemprop="name" content="{{ SITENAME }}"/>
+                <meta itemprop="url" content="{{ SITEURL }}"/>
+                <div itemscope itemtype="http://schema.org/ImageObject" itemprop="logo">
+                    <meta itemprop="url" content="https://goo.gl/photos/5nQ6QJG9Y8j6VzYn8"/>
+                </div> 
+            </div>
+            <div itemscope itemtype="http://schema.org/ImageObject" itemprop="image">
+                    <meta itemprop="url" content="https://goo.gl/photos/5nQ6QJG9Y8j6VzYn8"/>
+                    <meta itemprop="width" content="100"/>
+                    <meta itemprop="height" content="100"/>
+                </div> 
+            {% if article.tags %}
+                <span class='blogpost fullWidth'>
+                    Tags: {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}" class="label label-info">{{ tag }}</a> {% endfor %}
+                </span>
+            {% endif %}
+            {% include 'socialFooterWidget.html' %}
+        </footer>
+    </div>
+</article>
