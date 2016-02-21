@@ -1,2 +1,30 @@
 {% extends "base.html" %}
-{% block title %}{{ SITENAME }} - {{ category }}{% endblock %}
+
+{% block content %}
+    <div id="main" role="main" class="container" itemscope itemtype="http://schema.org/Blog">
+        <meta itemprop="name" content="{{SITENAME}}" />
+        <meta itemprop="description" content="{{ SITEDESCRIPTION }}" />
+        <meta itemprop="url" content="{{ SITEURL }}" />
+        <h1>{% block title %}{{ SITENAME }} - {{ category }}{% endblock %}</h1>
+    {% if articles %}
+        {% for article in articles_page.object_list %}
+            {# First item #}
+            {% if loop.first and not articles_page.has_previous() %}
+                {% include 'jumbotronArticleTemplate.html' %}
+            {# other items #}
+            {% else %}
+                {% include sedateArticleTemplate.html %}
+            {% endif %}
+            {% if loop.last %}
+                </ol><!-- /#posts-list -->
+                {% if loop.last and (articles_page.has_previous()
+                or not articles_page.has_previous() and loop.length > 1) %}
+                    {% include 'pagination.html' %}
+                {% endif %}
+                </section><!-- /#content -->
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    </div><!-- /container -->
+{%endblock %}  
+
