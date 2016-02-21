@@ -397,12 +397,14 @@
     "list-group.less",
     "panels.less",
     "wells.less",
-    "dropdowns.less",
+    "component-animations.less",
     "modals.less"
   ],
   "js": [
     "dropdown.js",
-    "modal.js"
+    "modal.js",
+    "collapse.js",
+    "transition.js"
   ],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=64af41991a35f7a1583b"
+  "customizerUrl": "http://getbootstrap.com/customize/?id=1d6c894428ce0389dbd0"
 }

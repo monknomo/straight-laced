@@ -39,7 +39,7 @@
         <link rel="apple-touch-icon" href="/link/to/apple-touch-icon.png">
 
         <!-- /ht Jeremy Keith - http://front.ie/mLXiaS -->
-        {% assets filters="cssmin", output="css/style.min.css", "css/global.css", "css/bootstrap.css", "css/bootstrap-theme.css"%}
+        {% assets filters="cssmin", output="css/style.min.css", "css/global.css", "css/bootstrap.min.css", "css/bootstrap-theme.min.css"%}
             <link rel="stylesheet" href="{{ SITEURL }}/{{ ASSET_URL }}">
         {% endassets %}
         <link rel="stylesheet" href="{{ SITEURL }}/theme/css/layout.css" media="all and (min-width: 33.236em)">
@@ -109,7 +109,7 @@
         {% block content %}{% endblock %}
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
         <div>
-         {% assets filters="closure_js", output="js/packed.js", "js/libs/modernizr-1.7.min.js", "js/libs/jquery-2.2.0.min.js", "js/libs/bootstrap.js" %}
+         {% assets filters="closure_js", output="js/packed.js", "js/libs/modernizr-1.7.min.js", "js/libs/jquery-2.2.0.min.js", "js/libs/bootstrap.min.js" %}
             <script src="{{ SITEURL }}/{{ ASSET_URL }}"></script>
         {% endassets %}
     </body>
