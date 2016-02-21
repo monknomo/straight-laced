@@ -118,5 +118,16 @@
          {% assets filters="closure_js", output="js/packed.js", "js/libs/modernizr-1.7.min.js", "js/libs/jquery-2.2.0.min.js", "js/libs/bootstrap.js", "js/cssLoader.js" %}
             <script src="{{ ASSET_URL }}"></script>
         {% endassets %}
+        <script>
+            var cb = function() {
+                var l = document.createElement('link'); l.rel = 'stylesheet';
+                l.href = '/theme/css/style.min.css';
+                var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+            };
+            var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+              webkitRequestAnimationFrame || msRequestAnimationFrame;
+            if (raf) raf(cb);
+            else window.addEventListener('load', cb);
+        </script>
     </body>
 </html>
