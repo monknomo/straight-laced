@@ -50,14 +50,6 @@
         <![endif]-->
     </head>
     <body>
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
         <div id="container" class="cf">
         {% block header %}
             <header id="main-header" class="top page-header">
@@ -107,7 +99,6 @@
             </header>
         {% endblock %}
         {% block content %}{% endblock %}
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
         <div>
          {% assets filters="closure_js", output="js/packed.js", "js/libs/modernizr-1.7.min.js", "js/libs/jquery-2.2.0.min.js", "js/libs/bootstrap.min.js" %}
             <script src="{{ SITEURL }}/{{ ASSET_URL }}"></script>

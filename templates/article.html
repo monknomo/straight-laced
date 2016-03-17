@@ -1,35 +1,5 @@
 {% extends "base.html" %}
 {% block title %}{{SITENAME}} - {{ article.title }}{% endblock %}
 {% block content %}
-<section id="main" role="main" class="container" itemscope itemtype="http://schema.org/Blog">
-        <meta itemprop="name" content="{{SITENAME}}" />
-        <meta itemprop="description" content="{{ SITEDESCRIPTION }}" />
-        <meta itemprop="url" content="{{ SITEURL }}" />
-    <article class="blogpost" itemscope itemtype="http://schema.org/blogPosting"  itemprop="blogPost">
-    <meta itemprop="url" content="{{ SITEURL }}/{{ article.url }}" />
-        <div class="media">
-            <header class="blogpost jumbotron media-heading">
-                <a href="{{ SITEURL }}/{{ article.url }}"><h1 class="media-heading" itemprop="headline">{{ article.title }}</h1></a>    
-                <section itemprop="description">
-                    {{article.summary}}
-                </section>
-            </header>
-            <aside class="blogpost media-left">
-                <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}"><img src="{{AVATARLOCATION}}"></img></a>   
-                <p itemprop="datePublished">{{article.date|strftime('%m/%d/%Y')}}</p>                 
-            </aside>
-            <section class="blogpost media-body" itemprop="articleBody">
-                {{ article.content }}
-            </section>
-            <footer class="blogpost">
-                {% if article.tags %}
-                    <span class='fullWidth'>
-                        Tags: {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}" class="label label-info">{{ tag }}</a> {% endfor %}
-                    </span>
-                {% endif %}
-                {% include 'socialFooterWidget.html' %}
-            </footer>
-        </div>
-    </article>
-</section>
+{% include 'jumbotronArticleTemplate.html' %}
 {% endblock %}
