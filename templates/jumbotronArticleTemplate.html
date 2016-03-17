@@ -11,7 +11,7 @@
             <div itemscope itemtype="http://schema.org/Person" itemprop="author">
                 <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}"><img itemprop="image" src="{{ article.author_gravatar }}"/></a>
                 <a itemprop="url" href="{{ SITEURL }}/{{ article.author.url }}" rel="author">
-                    <span itemprop="name"><strong>Gunnar Gissel</strong></span>
+                    <span itemprop="name"><strong>{{article.author}}</strong></span>
                 </a>                            
             </div>                       
             <time itemprop="datePublished">{{article.date|strftime('%m/%d/%Y')}}</time> 

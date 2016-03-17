@@ -6,13 +6,13 @@
             <div itemscope itemtype="http://schema.org/Person" itemprop="author">
                 <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}"><img itemprop="image" src="{{ article.author_gravatar }}"/></a>
                 <a itemprop="url" href="{{ SITEURL }}/{{ article.author.url }}" rel="author">
-                </a>
-                <div itemprop="description">He's a great guy</div>                              
+                    <span itemprop="name"><strong>{{article.author}}</strong></span>
+                </a>                              
             </div>                       
             <time itemprop="datePublished">{{article.date|strftime('%m/%d/%Y')}}</time>                         
         </aside>
         <div class="blogpost media-body">
-            <header class="blogpost media-heading"><a href="{{ SITEURL }}/{{ article.url }}" itemprop="url mainEntityOfPage"><h1  itemprop="headline name">{{ article.title }}</h1></a></header>
+            <header class="blogpost media-heading"><a href="{{ SITEURL }}/{{ article.url }}" itemprop="url mainEntityOfPage"><h1  itemprop="headline name">{{ article.title }}</h1></a><hr/></header>
             <section itemprop="articleBody">                                
                 {{ article.content }}
             </section class>
