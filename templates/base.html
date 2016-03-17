@@ -28,7 +28,11 @@
             {% endif %}
         {% endblock head %}
         <meta charset="utf-8" />
+        {% if article %}
+        <meta name="description" content="{{ article.summary }}">
+        {% else %}
         <meta name="description" content="{{ SITEDESCRIPTION }}">
+        {% endif %}
         <meta name="author" content="{{ AUTHOR }}">
         <!-- /ht Andy Clarke - http://front.ie/lkCwyf -->
         <meta http-equiv="cleartype" content="on">
