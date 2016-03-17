@@ -29,7 +29,7 @@
         {% endblock head %}
         <meta charset="utf-8" />
         {% if article %}
-        <meta name="description" content="{{ article.summary }}">
+        <meta name="description" content="{{ article.summary.replace("<p>","").replace("</p>","") }}">
         {% else %}
         <meta name="description" content="{{ SITEDESCRIPTION }}">
         {% endif %}
