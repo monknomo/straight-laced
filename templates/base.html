@@ -28,8 +28,18 @@
             {% endif %}
         {% endblock head %}
         <meta charset="utf-8" />
-        {% if article %}
+        {% if page_name ==  'categories' %}
+        <meta name="description" content="Categories of blog posts" >
+         {% elif page_name ==  'tags' %}
+        <meta name="description" content="A list of all the tags used in this website">     
+        {% elif page_name ==  'tag' %}
+        <meta name="description" content="Blog posts relating to tag {{ tag }}">    
+        {% elif page_name ==  'author' %}
+        <meta name="description" content="Blog posts written by {{ author }}"> 
+        {% elif article %}
         <meta name="description" content="{{ article.summary.replace("<p>","").replace("</p>","") }}">
+        {% elif page %}
+        <meta name="description" content="{{ page.summary.replace("<p>","").replace("</p>","") }}">
         {% else %}
         <meta name="description" content="{{ SITEDESCRIPTION }}">
         {% endif %}
@@ -107,5 +117,6 @@
          {% assets filters="closure_js", output="js/packed.js", "js/libs/modernizr-1.7.min.js", "js/libs/jquery-2.2.0.min.js", "js/libs/bootstrap.min.js" %}
             <script async src="{{ SITEURL }}/{{ ASSET_URL }}"></script>
         {% endassets %}
+        
     </body>
 </html>
