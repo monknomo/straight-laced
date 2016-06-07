@@ -37,9 +37,9 @@
         {% elif page_name ==  'author' %}
         <meta name="description" content="Blog posts written by {{ author }}"> 
         {% elif article %}
-        <meta name="description" content="{{ article.summary.replace("<p>","").replace("</p>","") }}">
+        <meta name="description" content="{{ article.summary.replace("<p>","").replace("</p>","").replace('"',"'") }}">
         {% elif page %}
-        <meta name="description" content="{{ page.summary.replace("<p>","").replace("</p>","") }}">
+        <meta name="description" content="{{ page.summary.replace("<p>","").replace("</p>","").replace('"',"'") }}">
         {% else %}
         <meta name="description" content="{{ SITEDESCRIPTION }}">
         {% endif %}
