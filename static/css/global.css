@@ -110,7 +110,7 @@ a:active, a:focus { outline: none; }
 ----------------------------------------------------------------------------------------*/
 
 body{
-    background:ghostwhite;
+    background:red;
 }
 
 span.fullWidth{
@@ -136,6 +136,14 @@ section#content > ul * {
     list-style: none;
 }
 
+code{
+    word-break:break-word;
+}
+
+article.blogpost {
+    border-radius:6px;
+}
+
 /* 6. CUSTOM LAYOUT & TYPOGRAPHY (Baby bear)
 ----------------------------------------------------------------------------------------*/
 #container {
@@ -143,8 +151,20 @@ section#content > ul * {
     max-width: 30em;
     margin: auto;
   }
+  
+article.blogpost {
+    border:dotted;
+    border-width:.1em;
+    padding:1em;
+    margin:1em;
+    overflow:default;
+    max-width:30em;
+}
 
-aside.blogpost { width: 0%;display:none; }
+aside.blogpost { 
+    max-width: 0%;
+    display:none; 
+}
 
 header.blogpost {
     padding:0em;

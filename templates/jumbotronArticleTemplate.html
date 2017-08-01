@@ -1,43 +1,47 @@
-<article class="blogpost panel panel-default" itemscope itemtype="http://schema.org/BlogPosting"  itemprop="blogPost">                  
+<article class="blogpost" itemscope itemtype="http://schema.org/BlogPosting"  itemprop="blogPost">                  
     <meta itemprop="dateModified" content="{{ article.modified|strftime('%m/%d/%Y') }}"/>
-    <div class="media panel-body">
-        <header class="blogpost jumbotron media-heading">
-            <a href="{{ SITEURL }}/{{ article.url }}"  itemprop="url mainEntityOfPage"><h1 class="media-heading" itemprop="headline name">{{ article.title }}</h1></a>    
-            <section itemprop="description">
-                {{article.summary}}
+
+            <header class="blogpost jumbotron ">
+                <a href="{{ SITEURL }}/{{ article.url }}"  itemprop="url mainEntityOfPage"><h1 itemprop="headline name">{{ article.title }}</h1></a>    
+                <section itemprop="description">
+                    {{article.summary}}
+                </section>
+            </header>
+
+        <div class="row">
+            <aside class="blogpost col-sm-4 col-lg-4 col-md-4" >                        
+                <div itemscope itemtype="http://schema.org/Person" itemprop="author" >
+                    <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}"><img itemprop="image" src="{{ article.author_gravatar }}"/></a>
+                    <a itemprop="url" href="{{ SITEURL }}/{{ article.author.url }}" rel="author">
+                        <span itemprop="name"><strong>{{article.author}}</strong></span>
+                    </a>                            
+                </div>                       
+                <time itemprop="datePublished">{{article.date|strftime('%m/%d/%Y')}}</time> 
+            </aside>
+            <section class="blogpost col-xs-12 col-sm-8 col-md-8 col-lg-8" itemprop="articleBody">
+                {{ article.content }}
             </section>
-        </header>
-        <aside class="blogpost media-left" >                        
-            <div itemscope itemtype="http://schema.org/Person" itemprop="author">
-                <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}"><img itemprop="image" src="{{ article.author_gravatar }}"/></a>
-                <a itemprop="url" href="{{ SITEURL }}/{{ article.author.url }}" rel="author">
-                    <span itemprop="name"><strong>{{article.author}}</strong></span>
-                </a>                            
-            </div>                       
-            <time itemprop="datePublished">{{article.date|strftime('%m/%d/%Y')}}</time> 
-        </aside>
-        <section class="blogpost media-body" itemprop="articleBody">
-            {{ article.content }}
-        </section>
-        <footer class="blogpost">
-            <div itemscope  itemtype="https://schema.org/Organization" itemprop="publisher">
-                <meta itemprop="name" content="{{ SITENAME }}"/>
-                <meta itemprop="url" content="{{ SITEURL }}"/>
-                <div itemscope itemtype="http://schema.org/ImageObject" itemprop="logo">
-                    <meta itemprop="url" content="https://goo.gl/photos/5nQ6QJG9Y8j6VzYn8"/>
-                </div> 
+        </div>
+        <footer class="blogpost row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div itemscope  itemtype="https://schema.org/Organization" itemprop="publisher">
+                    <meta itemprop="name" content="{{ SITENAME }}"/>
+                    <meta itemprop="url" content="{{ SITEURL }}"/>
+                    <div itemscope itemtype="http://schema.org/ImageObject" itemprop="logo">
+                        <meta itemprop="url" content="https://goo.gl/photos/5nQ6QJG9Y8j6VzYn8"/>
+                    </div> 
+                </div>
+                <div itemscope itemtype="http://schema.org/ImageObject" itemprop="image">
+                        <meta itemprop="url" content="https://goo.gl/photos/5nQ6QJG9Y8j6VzYn8"/>
+                        <meta itemprop="width" content="100"/>
+                        <meta itemprop="height" content="100"/>
+                    </div> 
+                {% if article.tags %}
+                    <span class='blogpost fullWidth'>
+                        Tags: {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}" class="label label-info">{{ tag }}</a> {% endfor %}
+                    </span>
+                {% endif %}
+                {% include 'socialFooterWidget.html' %}
             </div>
-            <div itemscope itemtype="http://schema.org/ImageObject" itemprop="image">
-                    <meta itemprop="url" content="https://goo.gl/photos/5nQ6QJG9Y8j6VzYn8"/>
-                    <meta itemprop="width" content="100"/>
-                    <meta itemprop="height" content="100"/>
-                </div> 
-            {% if article.tags %}
-                <span class='blogpost fullWidth'>
-                    Tags: {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}" class="label label-info">{{ tag }}</a> {% endfor %}
-                </span>
-            {% endif %}
-            {% include 'socialFooterWidget.html' %}
         </footer>
-    </div>
 </article>

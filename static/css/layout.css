@@ -8,7 +8,8 @@
     
 article.blogpost {
     max-width:60em;
-    margin: 0 auto;
+    border:dotted;
+    border-width:.2em;
 }
 
 header.blogpost {
@@ -16,9 +17,8 @@ header.blogpost {
 }
 
 aside.blogpost {
-    width:10em;
     max-width:10em;
-    display:table-cell;
+    display:block;
 }
 
 span.pageTitleContainer{
@@ -30,7 +30,19 @@ span.pageTitleContainer{
 /* 9. CUSTOM LAYOUT & TYPOGRAPHY (Mummy bear)
 ----------------------------------------------------------------------------------------*/
 @media screen and (min-width: 30em) and (max-width: 63.236em) {
-aside.blogpost{width:5em;display:table-cell;}
-#container { width: 30em; }
+    aside.blogpost{
+        max-width:5em;
+        display:block;  
+    }
+    
+    article.blogpost{
+        border:dotted;
+        border-width:.15em;
+        max-width:30em;
+    }
+    
+    #container { 
+        max-width: 30em; 
+        }
     
 }
