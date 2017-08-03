@@ -120,9 +120,9 @@
         {% endblock %}
         {% block content %}{% endblock %}
         <div>
-         {% assets filters="closure_js", output="js/packed.js", "js/libs/modernizr-1.7.min.js", "js/libs/jquery-2.2.0.min.js", "js/libs/bootstrap.min.js" %}
+         {% assets filters="closure_js", output="js/packed.js", "js/libs/modernizr-1.7.min.js", "js/libs/jquery-2.2.0.min.js", "js/libs/bootstrap.min.js", "js/footnotr.js" %}
             <script async src="{{ SITEURL }}/{{ ASSET_URL }}"></script>
         {% endassets %}
-        
+        </div>
     </body>
 </html>
