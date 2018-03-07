@@ -31,11 +31,11 @@
         {% if page_name ==  'categories' %}
         <meta name="description" content="Categories of blog posts" >
          {% elif page_name ==  'tags' %}
-        <meta name="description" content="A list of all the tags used in this website">     
+        <meta name="description" content="A list of all the tags used in this website">
         {% elif page_name ==  'tag' %}
-        <meta name="description" content="Blog posts relating to tag {{ tag }}">    
+        <meta name="description" content="Blog posts relating to tag {{ tag }}">
         {% elif page_name ==  'author' %}
-        <meta name="description" content="Blog posts written by {{ author }}"> 
+        <meta name="description" content="Blog posts written by {{ author }}">
         {% elif article %}
         <meta name="description" content="{{ article.summary.replace("<p>","").replace("</p>","").replace('"',"'") }}">
         {% elif page %}
@@ -48,15 +48,21 @@
         <meta http-equiv="cleartype" content="on">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          
+
         <link rel="shortcut icon" href="/link/to/favicon.ico">
         <link rel="apple-touch-icon" href="/link/to/apple-touch-icon.png">
 
         <!-- /ht Jeremy Keith - http://front.ie/mLXiaS -->
-        {% assets filters="cssmin", output="css/style.min.css", "css/global.css", "css/bootstrap.min.css", "css/bootstrap-theme.min.css"%}
-            <link rel="stylesheet" href="{{ SITEURL }}/{{ ASSET_URL }}">
-        {% endassets %}
-        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/layout.css" media="all and (min-width: 33.236em)">
+        <style type="text/css">
+        {% include 'css/bootstrap.min.css' %}
+        </style>
+        <style type="text/css">
+        {% include 'css/bootstrap-theme.min.css' %}
+        </style>
+        <style type="text/css">
+        {% include 'css/bootstrap-theme.min.css' %}
+        </style>
+        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/layout.min.css" media="all and (min-width: 33.236em)">
         <!-- 30em + (1.618em * 2) = 33.236em / Eliminates potential of horizontal scrolling in most cases -->
 
         <!--[if (lt IE 9) & (!IEMobile)]>
@@ -103,7 +109,7 @@
                                     </ul>
                                 </a>
                             </li>
-                        {% endif %}                        
+                        {% endif %}
                         <li {%if page_name == 'tags' %}class="active"{%endif%}><a href="{{ SITEURL }}/tags.html">Tags</a></li>
                         {% if FEED_ALL_ATOM %}
                            <li><a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full Atom Feed"><img src="/theme/images/atom-feed-icon-28x28.png"/></a></li>
@@ -112,7 +118,7 @@
                             <li><a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Full RSS Feed"><img src="/theme/images/feed-icon-28x28.png"/></a></li>
                         {% endif %}
                       </ul>
-                      
+
                     </div><!-- /.navbar-collapse -->
                   </div><!-- /.container-fluid -->
                 </nav>
