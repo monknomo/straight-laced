@@ -37,35 +37,94 @@
         {% elif page_name ==  'author' %}
         <meta name="description" content="Blog posts written by {{ author }}">
         {% elif article %}
-        <meta name="description" content="Author: {{ author }},  Date Published: {{article.date|strftime('%m/%d/%Y')}}, Date Modified: {{ article.modified|strftime('%m/%d/%Y') }}, {{ article.summary.replace("<p>","").replace("</p>","").replace('"',"'") }}">
-        <script type="application/ld+json">
-            {
-                "@context": "http://schema.org",
-                "@type": "BlogPosting",
-                "headline": "{{ article.title }}",
-                "datePublished": "{{article.date|strftime('%m/%d/%Y')}}"
-            }
-        </script>
-        <meta itemprop="name" content="{{ article.title }}">
-        <meta itemprop="description" content="{{ article.summary.replace("<p>","").replace("</p>","").replace('"',"'") }}">
-        <meta itemprop="image" content="{{ article.cover_image }}">
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:site" content="{{ article.author_twitter }}">
-        <meta name="twitter:title" content="{{ article.title }}">
-        <meta name="twitter:description" content="{{ article.summary.replace("<p>","").replace("</p>","").replace('"',"'")[0,199] }}">
-        <meta name="twitter:image:src" content="{{ article.cover_image }}">
-        <meta name="twitter:creator" content="{{article.author_twitter}}">
-        <meta property="og:title" content="{{ article.title }}" />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content="{{ SITEURL }}/{{ article.url }}" />
-        <meta property="og:description" content="{{ article.summary.replace("<p>","").replace("</p>","").replace('"',"'") }}" />
-        <meta property="og:site_name" content="Gunnar's Programming Blog" />
-        <meta property="article:published_time" content="{{article.date|strftime('%m/%d/%Y')}}" />
-        <meta property="article:modified_time" content="{{ article.modified|strftime('%m/%d/%Y') }}" />
-        <meta property="article:section" content="{{ article.category }}" />
-        <meta property="article:tag" content="{{ article.tags }}" />
-        <meta property="fb:admins" content="{{ article.author_facebook_id }}" />
-        <meta property="og:image" content="{{ article.cover_image }}" />
+            <meta name="description" content="Author: {{ author }},  Date Published: {{article.date|strftime('%m/%d/%Y')}}, Date Modified: {{ article.modified|strftime('%m/%d/%Y') }}, {{ article.summary.replace("<p>","").replace("</p>","").replace('"',"'") }}">
+            <script type="application/ld+json">
+                {
+                    "@context": "http://schema.org",
+                    "@type": "WebPage",
+                    "mainEntityOfPage": {
+                        "@type": "BlogPosting",
+                        "headline": "{{ article.title }}",
+                        "datePublished": "{{article.date|strftime('%m/%d/%Y')}}",
+                        "dateModified":"{{ article.modified|strftime('%m/%d/%Y') }}",
+                        "author":{
+                            "@type":"Person",
+                            "image":"{{ article.author_gravatar }}",
+                            "url":"{{ SITEURL }}/{{ article.author.url }}",
+                            "name":"{{article.author}}"
+                        },
+                        "publisher":{
+                            "@type":"Organization",
+                            "name": "{{ SITENAME }}",
+                            "url":"{{ SITEURL }}",
+                            "logo":{
+                                "@type":"ImageObject",
+                                "url":"{{ article.author_gravatar }}"
+                            },
+                            "image": {
+                                "@type":"ImageObject",
+                                "url":"{{ article.author_gravatar }}",
+                                "width":"400",
+                                "height":"100"
+                            }
+                        },
+                        "articleBody": "{{ article.content.replace('"', '\\"') }}",
+                        {% if article.cover_image %}
+                        "image": {
+                                "@type":"ImageObject",
+                                "url":"{{ article.cover_image }}"
+                            },
+                        {% else %}
+                        "image": {
+                                "@type":"ImageObject",
+                                "url":"{{ article.author_gravatar }}"
+                            },
+                        {% endif %}
+                        "mainEntityOfPage":"{{ SITEURL }}/{{ article.url }}"
+                    }
+                }
+            </script>
+            <meta itemprop="name" content="{{ article.title }}">
+            <meta itemprop="description" content="{{ article.summary.replace("<p>","").replace("</p>","").replace('"',"'") }}">
+            {% if article.cover_image %}
+            <meta itemprop="image" content="{{ article.cover_image }}">
+            {% else %}
+            <meta itemprop="image" content="{{ article.author_gravatar }}">
+            {% endif %}
+            {% if article.author_twitter %}
+                {% if article.cover_image %}
+                <meta name="twitter:card" content="summary_large_image">
+                <meta name="twitter:site" content="{{ article.author_twitter }}">
+                <meta name="twitter:title" content="{{ article.title }}">
+                <meta name="twitter:description" content="{{ article.summary.replace("<p>","").replace("</p>","").replace('"',"'")[0,199] }}">
+                <meta name="twitter:image:src" content="{{ article.cover_image }}">
+                <meta name="twitter:creator" content="{{article.author_twitter}}">
+                {% else %}
+                <meta name="twitter:card" content="summary">
+                        <meta name="twitter:site" content="{{ article.author_twitter }}">
+                <meta name="twitter:title" content="{{ article.title }}">
+                <meta name="twitter:description" content="{{ article.summary.replace("<p>","").replace("</p>","").replace('"',"'")[0,199] }}">
+                <-- Twitter Summary card images must be at least 120x120px -->
+                <meta name="twitter:image" content="{{ article.author_gravatar }}">
+                {% endif %}
+            {% endif %}
+            {% if article.author_facebook_id %}
+                <meta property="og:title" content="{{ article.title }}" />
+                <meta property="og:type" content="article" />
+                <meta property="og:url" content="{{ SITEURL }}/{{ article.url }}" />
+                <meta property="og:description" content="{{ article.summary.replace("<p>","").replace("</p>","").replace('"',"'") }}" />
+                <meta property="og:site_name" content="Gunnar's Programming Blog" />
+                <meta property="article:published_time" content="{{article.date|strftime('%m/%d/%Y')}}" />
+                <meta property="article:modified_time" content="{{ article.modified|strftime('%m/%d/%Y') }}" />
+                <meta property="article:section" content="{{ article.category }}" />
+                <meta property="article:tag" content="{{ article.tags }}" />
+                <meta property="fb:admins" content="{{ article.author_facebook_id }}" />
+                {% if article.cover_image %}
+                <meta property="og:image" content="{{ article.cover_image }}" />
+                {% else %}
+                <meta property="og:image" content="{{ article.author_gravatar }}" />
+                {% endif %}
+            {% endif %}
         {% elif page %}
         <meta name="description" content="{{ page.summary.replace("<p>","").replace("</p>","").replace('"',"'") }}">
         {% else %}
