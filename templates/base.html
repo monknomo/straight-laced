@@ -118,7 +118,8 @@
                 <meta property="article:modified_time" content="{{ article.modified|strftime('%m/%d/%Y') }}" />
                 <meta property="article:section" content="{{ article.category }}" />
                 <meta property="article:tag" content="{{ article.tags }}" />
-                <meta property="fb:admins" content="{{ article.author_facebook_id }}" />
+                <meta property="fb:admins" content="{{ article.author_facebook_id }}" /> 
+                <meta property="fb:app_id" content="{{article.facebook_app_id }}" />
                 {% if article.cover_image %}
                 <meta property="og:image" content="{{ article.cover_image }}" />
                 {% else %}
