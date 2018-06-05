@@ -1,3 +1,4 @@
+
 <html>
     <head>
         {% block head %}
@@ -87,25 +88,25 @@
             <meta itemprop="name" content="{{ article.title }}">
             <meta itemprop="description" content="{{ article.summary.replace("<p>","").replace("</p>","").replace('"',"'") }}">
             {% if article.cover_image %}
-            <meta itemprop="image" content="{{ article.cover_image }}">
+                <meta itemprop="image" content="{{ article.cover_image }}">
             {% else %}
-            <meta itemprop="image" content="{{ article.author_gravatar }}">
+                <meta itemprop="image" content="{{ article.author_gravatar }}">
             {% endif %}
             {% if article.author_twitter %}
                 {% if article.cover_image %}
-                <meta name="twitter:card" content="summary_large_image">
-                <meta name="twitter:site" content="{{ article.author_twitter }}">
-                <meta name="twitter:title" content="{{ article.title }}">
-                <meta name="twitter:description" content="{{ article.summary.replace("<p>","").replace("</p>","").replace('"',"'")[0,199] }}">
-                <meta name="twitter:image:src" content="{{ article.cover_image }}">
-                <meta name="twitter:creator" content="{{article.author_twitter}}">
+                    <meta name="twitter:card" content="summary_large_image">
+                    <meta name="twitter:site" content="{{ article.author_twitter }}">
+                    <meta name="twitter:title" content="{{ article.title }}">
+                    <meta name="twitter:description" content="{{ article.summary.replace("<p>","").replace("</p>","").replace('"',"'")[0,199] }}">
+                    <meta name="twitter:image:src" content="{{ article.cover_image }}">
+                    <meta name="twitter:creator" content="{{article.author_twitter}}">
                 {% else %}
-                <meta name="twitter:card" content="summary">
-                        <meta name="twitter:site" content="{{ article.author_twitter }}">
-                <meta name="twitter:title" content="{{ article.title }}">
-                <meta name="twitter:description" content="{{ article.summary.replace("<p>","").replace("</p>","").replace('"',"'")[0,199] }}">
-                <-- Twitter Summary card images must be at least 120x120px -->
-                <meta name="twitter:image" content="{{ article.author_gravatar }}">
+                    <meta name="twitter:card" content="summary">
+                            <meta name="twitter:site" content="{{ article.author_twitter }}">
+                    <meta name="twitter:title" content="{{ article.title }}">
+                    <meta name="twitter:description" content="{{ article.summary.replace("<p>","").replace("</p>","").replace('"',"'")[0,199] }}">
+                    <-- Twitter Summary card images must be at least 120x120px -->
+                    <meta name="twitter:image" content="{{ article.author_gravatar }}">
                 {% endif %}
             {% endif %}
             {% if article.author_facebook_id %}
@@ -125,9 +126,14 @@
                 <meta property="og:image" content="{{ article.author_gravatar }}" />
                 {% endif %}
             {% endif %}
-        {% elif page %}
+        {% elif page %}        
         <meta name="description" content="{{ page.summary.replace("<p>","").replace("</p>","").replace('"',"'") }}">
         {% else %}
+            {% if articles and articles_page %}
+                {% for article in articles_page.object_list %}
+                    a
+                {% endfor %}
+            {% endif %}
         <meta name="description" content="{{ SITEDESCRIPTION }}">
         {% endif %}
         <meta name="author" content="{{ AUTHOR }}">
@@ -204,6 +210,7 @@
                         {% if FEED_ALL_RSS %}
                             <li><a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} Full RSS Feed"><img src="/theme/images/feed-icon-28x28.png"/></a></li>
                         {% endif %}
+                       
                       </ul>
 
                     </div><!-- /.navbar-collapse -->
