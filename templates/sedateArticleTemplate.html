@@ -1,37 +1,23 @@
-<article class="blogpost" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
-                        <meta itemprop="name" content="{{ article.title }}"/>                
-    <meta itemprop="dateModified" content="{{ article.modified|strftime('%m/%d/%Y') }}"/>
+<article class="blogpost">
         <div class="row">
             <aside class="blogpost col-sm-2 col-md-2 col-lg-2">
-                <div itemscope itemtype="http://schema.org/Person" itemprop="author">
-                    <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}"><img itemprop="image" src="{{ article.author_gravatar }}"/></a>
-                    <a itemprop="url" href="{{ SITEURL }}/{{ article.author.url }}" rel="author">
+                <div>
+                    <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}"><imgsrc="{{ article.author_gravatar }}"/></a>
+                    <a href="{{ SITEURL }}/{{ article.author.url }}" rel="author">
                         <span itemprop="name"><strong>{{article.author}}</strong></span>
                     </a>                              
                 </div>                       
-                <time itemprop="datePublished">{{article.date|strftime('%m/%d/%Y')}}</time>                         
+                <time>{{article.date|strftime('%m/%d/%Y')}}</time>                         
             </aside>
             <div class="blogpost col-sm-10- col-md-10 col-lg-10">
-                <header class="blogpost"><a href="{{ SITEURL }}/{{ article.url }}" itemprop="url mainEntityOfPage"><h1  itemprop="headline name">{{ article.title }}</h1></a><hr/></header>
-                <section itemprop="articleBody">                                
+                <header class="blogpost"><a href="{{ SITEURL }}/{{ article.url }}"><h1>{{ article.title }}</h1></a><hr/></header>
+                <section>                                
                     {{ article.content }}
                 </section class>
             </div>
         </div>
         <div class="row">
             <footer class="blogpost col-md-12 col-lg-12 col-sm-12">
-                <div itemscope  itemtype="https://schema.org/Organization" itemprop="publisher">
-                    <meta itemprop="name" content="{{ SITENAME }}"/>
-                    <meta itemprop="url" content="{{ SITEURL }}"/>
-                    <div itemscope itemtype="http://schema.org/ImageObject" itemprop="logo">
-                        <meta itemprop="url" content="https://goo.gl/photos/5nQ6QJG9Y8j6VzYn8"/>
-                    </div> 
-                </div>
-                <div itemscope itemtype="http://schema.org/ImageObject" itemprop="image">
-                        <meta itemprop="url" content="https://goo.gl/photos/5nQ6QJG9Y8j6VzYn8"/>
-                        <meta itemprop="width" content="100"/>
-                        <meta itemprop="height" content="100"/>
-                    </div> 
                 {% if article.tags %}
                     <span class='blogpost fullWidth'>
                         Tags: {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}" class="label label-info">{{ tag }}</a> {% endfor %}
