@@ -1,10 +1,89 @@
 {% extends "base.html" %}
 
+{% block index_metadata %}
+    <script type="application/ld+json">{
+        "@context": "http://schema.org",
+        "@type": "Blog",
+        "name":"{{SITENAME}}",
+        "url":"{{SITEURL}}",
+        "description":"{{SITEDESCRIPTION}}",
+
+        "publisher":{
+                    "@type":"Organization",
+                    "name": "{{ SITENAME }}",
+                    "url":"{{ SITEURL }}"
+                    {% if LOGOURL %}                       
+                        ,"logo":{
+                            "@type":"ImageObject",
+                            "url":"{{ LOGOURL }}"
+                        },
+                    {% endif %}
+                }
+        {% if articles and articles_page %}
+            ,"blogPosts":[
+            {% for article in articles_page.object_list %}
+                {
+                    "@type": "BlogPosting",
+                    "headline": "{{ article.title }}",
+                    "datePublished": "{{article.date|strftime('%m/%d/%Y')}}",
+                    "dateModified":"{{ article.modified|strftime('%m/%d/%Y') }}",
+                    "author":{
+                        "@type":"Person",
+                        "image":"{{ article.author_gravatar }}",
+                        "url":"{{ SITEURL }}/{{ article.author.url }}",
+                        "name":"{{article.author}}"
+                    },
+                    "publisher":{
+                        "@type":"Organization",
+                        "name": "{{ SITENAME }}",
+                        "url":"{{ SITEURL }}",
+                        "logo":{
+                            "@type":"ImageObject",
+                            "url":"{{ article.author_gravatar }}"
+                        },
+                        "image": {
+                            "@type":"ImageObject",
+                            "url":"{{ article.author_gravatar }}",
+                            "width":"400",
+                            "height":"100"
+                        }
+                    },
+                    "articleSection": "{{ article.category }}",
+                    {%if article.tags %}
+                        "keywords": [
+                        {%for tag in article.tags %}
+                        {% if loop.last %}                        
+                        "{{tag.name}}"
+                        {% else %}
+                        "{{tag.name}}",
+                        {% endif %}
+                            
+                        {%endfor%}
+                        ],
+                    {%endif%}
+                    {% if article.cover_image %}
+                    "image": {
+                            "@type":"ImageObject",
+                            "url":"{{ article.cover_image }}"
+                        },
+                    {% else %}
+                    "image": {
+                            "@type":"ImageObject",
+                            "url":"{{ article.author_gravatar }}"
+                        },
+                    {% endif %}
+                    "mainEntityOfPage":"{{ SITEURL }}/{{ article.url }}"
+                }
+                {% if not loop.last %}  
+                    ,
+                {% endif %}
+            {% endfor %}
+            ]
+        {% endif %}
+    }</script>
+{%endblock%}
 {% block content %}
-    <div id="main" role="main" class="container" itemscope itemtype="http://schema.org/Blog">
-        <meta itemprop="name" content="{{SITENAME}}" />
-        <meta itemprop="description" content="{{ SITEDESCRIPTION }}" />
-        <meta itemprop="url" content="{{ SITEURL }}" />
+    <div id="main" role="main" class="container">
     {% if articles %}
         {% for article in articles_page.object_list %}
             {# First item #}
