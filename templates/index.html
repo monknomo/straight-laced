@@ -88,9 +88,8 @@
         {% for article in articles_page.object_list %}
             {# First item #}
             {% if loop.first and not articles_page.has_previous() %}
-                {% with standalone=true %}
+                {% set standalone=true %}
                 {% include 'jumbotronArticleTemplate.html' %}
-                {% endwith %}
             {# other items #}
             {% else %}
                 {% include 'sedateArticleTemplate.html' %}
