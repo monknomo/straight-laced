@@ -81,6 +81,26 @@
             ]
         {% endif %}
     }</script>
+    
+   {% if TWITTER_USERNAME %}
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="{{ TWITTER_USERNAME }}">
+        <meta name="twitter:title" content="{{ SITENAME }}">
+        <meta name="twitter:description" content="{{ SITEDESCRIPTION }}">
+        <meta name="twitter:image:src" content="{{ SITENAME }}/theme/images/logo.png">
+        <meta name="twitter:creator" content="{{TWITTER_USERNAME}}">
+    {% endif %}
+    {% if FACEBOOK_ID %}
+        <meta property="og:title" content="{{ SITENAME }}" />
+        <meta property="og:type" content="blog" />
+        <meta property="og:url" content="{{ SITEURL }}" />
+        <meta property="og:description" content="{{ SITEDESCRIPTION }}" />
+        <meta property="og:site_name" content="{{SITENAME}}" />
+        <meta property="fb:admins" content="{{ FACEBOOK_ID }}" /> 
+        <meta property="fb:app_id" content="{{ FACEBOOK_APP_ID }}" />
+        <meta property="og:image" content="{{ SITENAME }}/theme/images/logo.png" />
+
+    {% endif %}
 {%endblock%}
 {% block content %}
     <div id="main" role="main" class="container">
