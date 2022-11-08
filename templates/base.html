@@ -50,7 +50,7 @@
                         "dateModified":"{{ article.modified|strftime('%m/%d/%Y') }}",
                         "author":{
                             "@type":"Person",
-                            "image":"{{ article.author_gravatar }}",
+                            "image":"{{ article.author_avatar }}",
                             "url":"{{ SITEURL }}/{{ article.author.url }}",
                             "name":"{{article.author}}"
                         },
@@ -60,11 +60,11 @@
                             "url":"{{ SITEURL }}",
                             "logo":{
                                 "@type":"ImageObject",
-                                "url":"{{ article.author_gravatar }}"
+                                "url":"{{ article.author_avatar }}"
                             },
                             "image": {
                                 "@type":"ImageObject",
-                                "url":"{{ article.author_gravatar }}",
+                                "url":"{{ article.author_avatar }}",
                                 "width":"400",
                                 "height":"100"
                             }
@@ -77,7 +77,7 @@
                         {% else %}
                         "image": {
                                 "@type":"ImageObject",
-                                "url":"{{ article.author_gravatar }}"
+                                "url":"{{ article.author_avatar }}"
                             },
                         {% endif %}
                         "mainEntityOfPage":"{{ SITEURL }}/{{ article.url }}"
@@ -89,7 +89,7 @@
             {% if article.cover_image %}
                 <meta itemprop="image" content="{{ article.cover_image }}">
             {% else %}
-                <meta itemprop="image" content="{{ article.author_gravatar }}">
+                <meta itemprop="image" content="{{ article.author_avatar }}">
             {% endif %}
             {% if TWITTER_USERNAME %}
                 {% if article.cover_image %}
@@ -105,7 +105,7 @@
                     <meta name="twitter:title" content="{{ article.title }}">
                     <meta name="twitter:description" content="{{ article.summary.replace("<p>","").replace("</p>","").replace('"',"'")[0,199] }}">
                     <-- Twitter Summary card images must be at least 120x120px -->
-                    <meta name="twitter:image" content="{{ article.author_gravatar }}">
+                    <meta name="twitter:image" content="{{ article.author_avatar }}">
                 {% endif %}
             {% endif %}
             {% if FACEBOOK_ID %}
@@ -123,7 +123,7 @@
                 {% if article.cover_image %}
                 <meta property="og:image" content="{{ article.cover_image }}" />
                 {% else %}
-                <meta property="og:image" content="{{ article.author_gravatar }}" />
+                <meta property="og:image" content="{{ article.author_avatar }}" />
                 {% endif %}
             {% endif %}
         {% elif page %}        
@@ -193,7 +193,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                    {% for p in PAGES %}
+                                    {% for p in pages %}
                                         <li {% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
                                     {% endfor %}
                                     </ul>
@@ -206,11 +206,6 @@
                             <a href="https://dev.to/{{DEVTO_USERNAME}}">
   <img src="https://d2fltix0v2e0sb.cloudfront.net/dev-badge.svg" alt="{{DEVTO_ALT_TEXT}}" height="30" width="30" /></a>
                            </li>
-                        {% endif %}
-                        {% if TWITTER_USERNAME %}
-                            <li>
-                                <a href="https://twitter.com/intent/user?screen_name=monknomo"><img src="{{SITEURL}}/theme/images/Twitter_Social_Icon_Rounded_Square_Color.svg" height="30" width="30" onerror="this.src='{{SITEURL}}/theme/images/Twitter_Social_Icon_Rounded_Square_Color.png'" alt="follow me on twitter" title="follow me on twitter"/></a>
-                            </li>
                         {% endif %}
                         {% if FEED_ALL_ATOM %}
                            <li><a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Full Atom Feed"><img src="/theme/images/atom-feed-icon-28x28.png"/></a></li>
@@ -227,7 +222,7 @@
         {% endblock %}
         {% block content %}{% endblock %}
         <div>
-         {% assets filters="closure_js", output="js/packed.js", "js/libs/modernizr-1.7.min.js", "js/libs/jquery-2.2.0.min.js", "js/libs/bootstrap.min.js", "js/footnotr.js" %}
+         {% assets filters="rjsmin", output="js/packed.js", "js/libs/modernizr-1.7.min.js", "js/libs/jquery-2.2.0.min.js", "js/libs/bootstrap.min.js", "js/footnotr.js" %}
             <script async src="{{ SITEURL }}/{{ ASSET_URL }}"></script>
         {% endassets %}
         </div>

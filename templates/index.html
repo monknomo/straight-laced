@@ -29,7 +29,7 @@
                     "dateModified":"{{ article.modified|strftime('%m/%d/%Y') }}",
                     "author":{
                         "@type":"Person",
-                        "image":"{{ article.author_gravatar }}",
+                        "image":"{{ article.author_avatar }}",
                         "url":"{{ SITEURL }}/{{ article.author.url }}",
                         "name":"{{article.author}}"
                     },
@@ -39,11 +39,11 @@
                         "url":"{{ SITEURL }}",
                         "logo":{
                             "@type":"ImageObject",
-                            "url":"{{ article.author_gravatar }}"
+                            "url":"{{ article.author_avatar }}"
                         },
                         "image": {
                             "@type":"ImageObject",
-                            "url":"{{ article.author_gravatar }}",
+                            "url":"{{ article.author_avatar }}",
                             "width":"400",
                             "height":"100"
                         }
@@ -69,7 +69,7 @@
                     {% else %}
                     "image": {
                             "@type":"ImageObject",
-                            "url":"{{ article.author_gravatar }}"
+                            "url":"{{ article.author_avatar }}"
                         },
                     {% endif %}
                     "mainEntityOfPage":"{{ SITEURL }}/{{ article.url }}"

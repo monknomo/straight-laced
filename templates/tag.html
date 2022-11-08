@@ -9,18 +9,12 @@
             <article class="panel panel-default">
                    <div class="media panel-body">                    
                         <aside class="media-left">
-                            <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}"><img src="http://www.gravatar.com/avatar/fdaaf6ef49e7c89553227df9cea99fdd"></img></a>                        
+                            <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}"><img src="http://www.avatar.com/avatar/fdaaf6ef49e7c89553227df9cea99fdd"></img></a>                        
                         </aside>
                         <section class="media-body">
                             <header><a href="{{ SITEURL }}/{{ article.url }}"><h1 class="media-heading">{{ article.title }}</h1></a></header>
                             {{ article.summary }}
                         </section class>
-                        <footer>
-                            <span class="socialFooterBar">
-                                <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ SITEURL }}/{{ article.url }}" data-text="Check out Gunnar's new blog post: {{article.title}}!" data-via="monknomo">Tweet</a>
-                                <a class="tumblr-share-button" data-color="blue" data-notes="right" data-posttype="link" data-tags="" data-title="{{article.title}}" data-content="{{ SITEURL }}/{{ article.url }}" data-show-via="<a href='{{SITEURL}}'>Gunnar Gissel's Blog</a>" href="https://embed.tumblr.com/share"></a>
-                            </span>
-                        </footer>
                     </div>
             </article>
 

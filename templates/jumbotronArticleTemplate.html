@@ -10,7 +10,7 @@
         <div class="row">
             <aside class="blogpost col-sm-4 col-lg-4 col-md-4" >                        
                 <div>
-                    <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}"><img src="{{ article.author_gravatar }}"/></a>
+                    <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}"><img src="{{ article.author_avatar }}"/></a>
                     <a href="{{ SITEURL }}/{{ article.author.url }}" rel="author">
                         <span><strong>{{article.author}}</strong></span>
                     </a>                            
@@ -28,7 +28,6 @@
                         Tags: {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}" class="label label-info">{{ tag }}</a> {% endfor %}
                     </span>
                 {% endif %}
-                {% include 'socialFooterWidget.html' %}
             </div>
             {% block breadcrumbs %}{% endblock %}
         </footer>
